@@ -30,7 +30,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         //Configure the arrow
-        self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor];
+        if(self.arrowTop) {
+            self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, 0, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor arrowTop:YES];
+        } else {
+            self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor arrowTop:YES];
+        }
+        
         [self.arrow setCenter:CGPointMake(self.frame.size.width/2.0, self.arrow.center.y)];
         [self addSubview:self.arrow];
         
@@ -209,7 +214,7 @@
 - (float) hypotenuse {
     return (CGFloat)self.frame.size.width / sqrt(2.0);
 }
--(id) initWithFrame:(CGRect)frame color:(UIColor*) color {
+-(id) initWithFrame:(CGRect)frame color:(UIColor*) color arrowTop:(BOOL)arrowTop {
     if (self = [super initWithFrame:frame]) {
         self.isShowing = YES;
         
@@ -219,12 +224,20 @@
         CGPathMoveToPoint(path,NULL,0.0,0.0);
         CGPathAddLineToPoint(path, NULL, 0.0f, 0.0f);
         CGPathAddLineToPoint(path, NULL, frame.size.width, 0.0f);
-        CGPathAddLineToPoint(path, NULL, frame.size.width/2.0, frame.size.height);
+        if(arrowTop) {
+            CGPathAddLineToPoint(path, NULL, frame.size.width/2.0, -frame.size.height);
+        } else {
+            CGPathAddLineToPoint(path, NULL, frame.size.width/2.0, frame.size.height);
+        }
+        
 
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         [shapeLayer setPath:path];
-        [shapeLayer setFillColor:[kDefaultGradientBottomColor CGColor]];
-        
+        if(arrowTop) {
+            [shapeLayer setFillColor:[kDefaultGradientTopColor CGColor]];
+        } else {
+            [shapeLayer setFillColor:[kDefaultGradientBottomColor CGColor]];
+        }
         
         
         [self.layer addSublayer:shapeLayer];

@@ -35,7 +35,8 @@
 -(void) show:(BOOL) animated;
 -(void) hide:(BOOL) animated;
 -(void) toggle:(BOOL) animated;
--(id) initWithFrame:(CGRect)frame color:(UIColor*) color;
+-(id) initWithFrame:(CGRect)frame color:(UIColor*) color arrowTop:(BOOL)arrowTop;
+
 @end
 @protocol KLHorizontalSelectDelegate <NSObject>
 @optional
@@ -46,6 +47,7 @@
 @property (nonatomic, strong) NSIndexPath* currentIndex;
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) NSArray* tableData;
+@property (nonatomic, assign) BOOL arrowTop;
 @property (nonatomic, strong) KLHorizontalSelectArrow* arrow;
 @property (nonatomic, strong) id<KLHorizontalSelectDelegate> delegate;
 
