@@ -159,7 +159,13 @@
         KLHorizontalSelectCell* cell = (KLHorizontalSelectCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         
         NSDictionary* cellData = [self.tableData objectAtIndex: indexPath.row];
-        [cell.image setImage:[UIImage imageNamed: [cellData objectForKey:@"image"]]];
+    
+        if([[cellData objectForKey:@"image"] isMemberOfClass:[UIImage class]]) {
+            [cell.image setImage:[cellData objectForKey:@"image"]];
+        } else {
+            [cell.image setImage:[UIImage imageNamed:[cellData objectForKey:@"image"] ]];
+        }
+    
         [cell.label setText: [cellData objectForKey:@"text"]];
         [cell setSelectionStyle:UITableViewCellEditingStyleNone];
 
