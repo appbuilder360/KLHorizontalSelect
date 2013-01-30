@@ -51,7 +51,7 @@
 @property (nonatomic, strong) KLHorizontalSelectArrow* arrow;
 @property (nonatomic, strong) id<KLHorizontalSelectDelegate> delegate;
 
--(id) initWithFrame:(CGRect)frame delegate:(id<KLHorizontalSelectDelegate>) delegate;
+-(id) initWithFrame:(CGRect)frame delegate:(id<KLHorizontalSelectDelegate>) delegate andArrowTop:(BOOL)arrowTop;
 @end
 
 

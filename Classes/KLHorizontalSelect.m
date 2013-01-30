@@ -19,8 +19,9 @@
     return self.frame.size.width/2.0 - kDefaultCellWidth/2.0;
 }
 
--(id) initWithFrame:(CGRect)frame delegate:(id<KLHorizontalSelectDelegate>) delegate {
+-(id) initWithFrame:(CGRect)frame delegate:(id<KLHorizontalSelectDelegate>) delegate andArrowTop:(BOOL)arrowTop{
     self.delegate = delegate;
+    self.arrowTop = arrowTop;
     return  [self initWithFrame:frame];
 }
 
