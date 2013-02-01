@@ -161,9 +161,11 @@
 }
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
         static NSString* reuseIdentifier = @"HorizontalCell";
-        [self.tableView registerClass:[KLHorizontalSelectCell class] forCellReuseIdentifier:reuseIdentifier];
         KLHorizontalSelectCell* cell = (KLHorizontalSelectCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-        
+        if(cell == nil) {
+            cell = [[KLHorizontalSelectCell alloc] init];
+        }
+    
         NSDictionary* cellData = [self.tableData objectAtIndex: indexPath.row];
     
         if([[cellData objectForKey:@"image"] isMemberOfClass:[UIImage class]]) {
